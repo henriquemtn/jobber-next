@@ -22,7 +22,6 @@ export default function NavItem({
 
   // Verifica se a rota atual corresponde ao href do NavItem
   const isActive = pathname === href;
-  console.log("isActive", isActive);
 
   return (
     <Link href={href}

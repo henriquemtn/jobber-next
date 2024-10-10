@@ -40,7 +40,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import NavItem from "./navitem"
 import Image from "next/image"
@@ -117,10 +117,12 @@ export function Navigation() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
-              <nav className="grid gap-2 text-lg font-medium">
-                <Link href="#" className="flex items-center gap-2 text-lg font-semibold mx-auto">
+            <SheetTitle>
+            <Link href="#" className="flex items-center gap-2 text-lg font-semibold">
                   <Image alt="Jobber" src="/jobber-logo.png" width={90} height={31} />
                 </Link>
+            </SheetTitle>
+              <nav className="grid gap-2 text-lg font-medium">
                 <NavItem href="/" icon={Home} label="Dashboard" sidebarOpen={true} />
                 <NavItem href="/solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={true} />
                 <NavItem href="/jobs" icon={Clock4} label="Jobs" badge="6" sidebarOpen={true} />
