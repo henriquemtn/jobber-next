@@ -24,7 +24,6 @@ import {
   UserIcon,
 } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -41,7 +40,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import NavItem from "./navitem"
@@ -85,13 +83,7 @@ export function Navigation() {
             <nav className="grid items-start text-sm font-medium">
               <NavItem href="/" icon={Home} label="Dashboard" sidebarOpen={sidebarOpen} />
               <NavItem href="/solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={sidebarOpen} />
-              <NavItem
-                href="/jobs"
-                icon={Clock4}
-                label="Jobs"
-                badge="6"
-                sidebarOpen={sidebarOpen}
-              />
+              <NavItem href="/jobs" icon={Clock4} label="Jobs" badge="6" sidebarOpen={sidebarOpen} />
               <NavItem href="/pauta" icon={CalendarDays} label="Pauta" sidebarOpen={sidebarOpen} />
               <NavItem href="/relatorios" icon={LineChart} label="Relatórios" sidebarOpen={sidebarOpen} />
             </nav>
@@ -120,21 +112,20 @@ export function Navigation() {
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="shrink-0 md:hidden">
-                <Menu className="h-5 w-5" />
+                <Menu className="h-5 w-5 text-white" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
               <nav className="grid gap-2 text-lg font-medium">
-                <Link href="#" className="flex items-center gap-2 text-lg font-semibold">
-                  <Package2 className="h-6 w-6" />
-                  <span className="">Acme Inc</span>
+                <Link href="#" className="flex items-center gap-2 text-lg font-semibold mx-auto">
+                  <Image alt="Jobber" src="/jobber-logo.png" width={90} height={31} />
                 </Link>
-                <NavItem href="/" icon={Home} label="Dashboard" />
-                <NavItem href="#" icon={ShoppingCart} label="Orders" badge="6" />
-                <NavItem href="#" icon={Package} label="Products" />
-                <NavItem href="#" icon={Users} label="Customers" />
-                <NavItem href="#" icon={LineChart} label="Analytics" />
+                <NavItem href="/" icon={Home} label="Dashboard" sidebarOpen={true} />
+                <NavItem href="/solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={true} />
+                <NavItem href="/jobs" icon={Clock4} label="Jobs" badge="6" sidebarOpen={true} />
+                <NavItem href="/pauta" icon={CalendarDays} label="Pauta" sidebarOpen={true} />
+                <NavItem href="/relatorios" icon={LineChart} label="Relatórios" sidebarOpen={true} />
               </nav>
               <div className="mt-auto">
                 <Card>

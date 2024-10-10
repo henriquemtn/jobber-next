@@ -20,6 +20,8 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         sidebar: "hover:bg-accent border-b-[1px] border-slate-200 rounded-none hover:text-accent-foreground",
+        submit:
+          "bg-[#3F19FF] text-white font-bold shadow hover:bg-blue-800 h-[40px]",
       },
       size: {
         default: "h-9 px-4 py-2",
