@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <>
       <ProtectedRoute>
-        <main className="flex flex-1 min-h-screen flex-col gap-4 ml-20 pt-[84px] pb-6 lg:gap-6 lg:px-6">
+        <main className="flex flex-1 min-h-screen flex-col gap-4 md:ml-[72px] pt-[84px] pb-6 lg:gap-6 lg:px-6 dark:bg-[#0E0E10]">
             <div className="flex items-center">
               <h1 className="text-lg font-semibold md:text-2xl">Dashboard</h1>
             </div>

@@ -46,6 +46,7 @@ import NavItem from "./navitem"
 import Image from "next/image"
 import { useAuth } from "@/hooks/useAuth"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { ThemeSwitch } from "@/components/themeSwitch"
 
 export function Navigation() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -55,12 +56,12 @@ export function Navigation() {
     <div className="grid w-full md:grid-cols-[auto_1fr]">
       <div
         className={cn(
-          "hidden shadow-lg bg-white md:block transition-all duration-300 ease-out fixed z-[999] h-full left-0",
+          "hidden shadow-lg bg-white dark:bg-[#1F1E23] md:block transition-all duration-300 ease-out fixed z-[999] h-full left-0",
           sidebarOpen ? "md:w-[220px] lg:w-[280px]" : "md:w-[60px] lg:w-[72px]"
         )}
       >
         <div className="flex h-full max-h-screen flex-col relative">
-          <div className="flex h-14 w-full justify-center items-center px-4 lg:h-[60px] text-white bg-[#17162E] border-r border-slate-800">
+          <div className="flex h-14 w-full justify-center items-center px-4 lg:h-[60px] text-white bg-[#17162E] dark:bg-[#18171B] border-r border-slate-800">
             <Link href="/" className="flex items-center justify-center gap-2 font-semibold">
               {!sidebarOpen && <Image alt="Jobber" src="/favicon.svg" width={25} height={25} />}
               {sidebarOpen && <Image alt="Jobber" src="/jobber-white-logo.svg" width={90} height={31} />}
@@ -108,7 +109,7 @@ export function Navigation() {
         </div>
       </div>
       <div className="flex flex-col">
-        <header className="fixed bg-[#17162E] z-[888] top-0 w-full flex h-14 items-center gap-4 px-4 lg:h-[60px] lg:px-6">
+        <header className="fixed bg-[#17162E] dark:bg-[#18171B] z-[888] top-0 w-full flex h-14 items-center gap-4 px-4 lg:h-[60px] lg:px-6">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -161,14 +162,15 @@ export function Navigation() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel className="pt-3">
                 {user && (
-                  <span className="text-black">
+                  <span className="text-black dark:text-white">
                     {user.name}
                   </span>
                 )}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer">Minha conta <UserIcon className="w-4 h-4 ml-1" /></DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">Minha conta</DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">Suporte</DropdownMenuItem>
+              <ThemeSwitch />
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout} className="cursor-pointer">Sair do Jobber</DropdownMenuItem>
             </DropdownMenuContent>

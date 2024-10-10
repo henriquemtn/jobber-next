@@ -26,7 +26,7 @@ export default function NavItem({
   return (
     <Link href={href}
         className={cn(
-          "flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition-colors border-b rounded-none border-gray-100",
+          "flex items-center gap-2 px-4 py-3 hover:bg-gray-100 dark:hover:bg-[#1F1E22] transition-colors border-b rounded-none border-gray-100 dark:border-gray-800",
           isActive ? "font-semibold text-[#3F19FF]" : "",
           sidebarOpen ? "justify-start" : "justify-center"
         )}
