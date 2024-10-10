@@ -21,6 +21,7 @@ import {
   MessageSquare,
   MessageSquareText,
   CalendarDays,
+  UserIcon,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -45,9 +46,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import NavItem from "./navitem"
 import Image from "next/image"
+import { useAuth } from "@/hooks/useAuth"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 export function Navigation() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const { logout, user } = useAuth()
 
   return (
     <div className="grid w-full md:grid-cols-[auto_1fr]">
@@ -79,23 +83,17 @@ export function Navigation() {
           </div>
           <div className="flex-1">
             <nav className="grid items-start text-sm font-medium">
-              <NavItem href="/" icon={Home} label="Dashboard" sidebarOpen={sidebarOpen} />
-              <NavItem href="solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={sidebarOpen} />
+              <NavItem href="/dashboard" icon={Home} label="Dashboard" sidebarOpen={sidebarOpen} />
+              <NavItem href="/dashboard/solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={sidebarOpen} />
               <NavItem
-                href="jobs"
+                href="/dashboard/jobs"
                 icon={Clock4}
                 label="Jobs"
                 badge="6"
                 sidebarOpen={sidebarOpen}
               />
-              <NavItem
-                href="relatorios"
-                icon={Package}
-                label="Relatórios"
-                sidebarOpen={sidebarOpen}
-              />
-              <NavItem href="pauta" icon={CalendarDays} label="Pauta" sidebarOpen={sidebarOpen} />
-              <NavItem href="solicitacoes" icon={LineChart} label="Relatórios" sidebarOpen={sidebarOpen} />
+              <NavItem href="/dashboard/pauta" icon={CalendarDays} label="Pauta" sidebarOpen={sidebarOpen} />
+              <NavItem href="/dashboard/relatorios" icon={LineChart} label="Relatórios" sidebarOpen={sidebarOpen} />
             </nav>
           </div>
           {sidebarOpen && (
@@ -160,17 +158,26 @@ export function Navigation() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon" className="bg-transparent rounded-full text-white">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
+                <Avatar>
+                  <AvatarFallback className="bg-gray-700 text-white">
+                    {user && user.name.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel className="pt-3">
+                {user && (
+                  <span className="text-black">
+                    {user.name}
+                  </span>
+                )}
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">Minha conta <UserIcon className="w-4 h-4 ml-1" /></DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">Suporte</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={logout} className="cursor-pointer">Sair do Jobber</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

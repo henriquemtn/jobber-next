@@ -35,10 +35,9 @@ export default function AuthPage() {
   const handleSubmit = async (values: IFormValues) => {
     try {
       const response = await mutateAsync(values);
-      // You can use the response to perform additional actions if needed
-      login(response); // Assuming you have a login function in useAuth
+      login(response);
       toast.success('Login bem-sucedido!');
-      router.push('/');
+      router.push('/dashboard');
     } catch (error) {
       console.error(error);
       toast.error('Erro ao realizar login. Tente novamente.');

@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/contexts/AuthProvider";
 import { headers } from "next/headers";
 import Providers from "@/contexts/Providers";
+import { Navigation } from "./dashboard/_components/navigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,12 +32,12 @@ export default function RootLayout({
   return (
         <html lang="en">
           <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <Providers>
-              <Toaster />
-              <AuthProvider>
-              {children}
-            </AuthProvider>
-          </Providers>
+            <Providers>
+                <Toaster />
+                <AuthProvider>
+                {children}
+              </AuthProvider>
+            </Providers>
           </body>
         </html>
   );
