@@ -37,7 +37,7 @@ export default function AuthPage() {
       const response = await mutateAsync(values);
       login(response);
       toast.success('Login bem-sucedido!');
-      router.push('/dashboard');
+      router.push('/');
     } catch (error) {
       console.error(error);
       toast.error('Erro ao realizar login. Tente novamente.');

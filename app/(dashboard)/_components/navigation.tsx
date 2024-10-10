@@ -83,17 +83,17 @@ export function Navigation() {
           </div>
           <div className="flex-1">
             <nav className="grid items-start text-sm font-medium">
-              <NavItem href="/dashboard" icon={Home} label="Dashboard" sidebarOpen={sidebarOpen} />
-              <NavItem href="/dashboard/solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={sidebarOpen} />
+              <NavItem href="/" icon={Home} label="Dashboard" sidebarOpen={sidebarOpen} />
+              <NavItem href="/solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={sidebarOpen} />
               <NavItem
-                href="/dashboard/jobs"
+                href="/jobs"
                 icon={Clock4}
                 label="Jobs"
                 badge="6"
                 sidebarOpen={sidebarOpen}
               />
-              <NavItem href="/dashboard/pauta" icon={CalendarDays} label="Pauta" sidebarOpen={sidebarOpen} />
-              <NavItem href="/dashboard/relatorios" icon={LineChart} label="Relatórios" sidebarOpen={sidebarOpen} />
+              <NavItem href="/pauta" icon={CalendarDays} label="Pauta" sidebarOpen={sidebarOpen} />
+              <NavItem href="/relatorios" icon={LineChart} label="Relatórios" sidebarOpen={sidebarOpen} />
             </nav>
           </div>
           {sidebarOpen && (

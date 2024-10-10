@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/contexts/AuthProvider";
 import { headers } from "next/headers";
 import Providers from "@/contexts/Providers";
-import { Navigation } from "./dashboard/_components/navigation";
+import { Navigation } from "./(dashboard)/_components/navigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
