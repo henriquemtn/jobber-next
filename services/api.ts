@@ -2,7 +2,7 @@ import axios from 'axios';
 import { clearTokensAndHeader, getLocalAccessToken, getLocalRefreshToken, setLocalAccessToken } from '@/helpers/auth';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API,
+  baseURL: process.env.NEXT_PUBLIC_REACT_APP_API,
   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
 });
 

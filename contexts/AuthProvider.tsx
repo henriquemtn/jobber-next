@@ -16,7 +16,7 @@ import { AuthContext } from './AuthContext';
 import api from '@/services/api';
 import toast from 'react-hot-toast';
 
-export const AuthProvider = ({ children }: { children: JSX.Element }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter(); // Update the type of 'router'
   const accessToken = getLocalAccessToken();
 
