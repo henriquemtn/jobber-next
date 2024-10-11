@@ -35,7 +35,7 @@ export default function AuthPage() {
   const handleSubmit = async (values: IFormValues) => {
     try {
       const response = await mutateAsync(values);
-      login(response);
+      await login(response);  // Aguarda o login ser completado
       toast.success('Login bem-sucedido!');
       router.push('/');
     } catch (error) {
