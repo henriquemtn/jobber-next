@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { fetchJobs } from '@/services/jobs';
@@ -23,7 +23,7 @@ export default function HomePage() {
   });
   const { page, pageSize } = paginationModel;
 
-  const [filters, setFilters] = useState<JobFilters>({
+  const filters = useState<JobFilters>({
     responsible: user ? user.id : undefined,
     has_open_note: true,
   });
@@ -35,7 +35,7 @@ export default function HomePage() {
   const { refetch, isLoading, data: jobs } = useQuery({
     queryKey: ['jobs', page, pageSize, filters],
     queryFn: async () => {
-      return await fetchJobs(page, pageSize, filters as Record<string, unknown>);
+      return await fetchJobs(page, pageSize, filters as unknown as Record<string, unknown>);
     },
     enabled: true,
   });
@@ -43,9 +43,6 @@ export default function HomePage() {
   useEffect(() => {
     refetch();
   }, [filters, page, pageSize, refetch]);
-
-  // * Refs
-  const filterWrapper = useRef<HTMLDivElement>(null);
 
   const handleViewJob = ({ jobId }: { jobId: number }) => {
     navigate.push(`/jobs/details/${jobId}`);
@@ -58,7 +55,7 @@ export default function HomePage() {
       <main className="flex flex-1 min-h-screen flex-col gap-4 md:ml-[72px] pt-[84px] pb-6 lg:gap-6 lg:px-6 dark:bg-[#0E0E10]">
         <div className="flex items-start flex-col">
           <h1 className="text-lg font-semibold md:text-2xl">Olá, {user?.name}</h1>
-          <p>Here's a list of your tasks for this month!</p>
+          <p>Aqui há uma lista dos seus Jobs!</p>
         </div>
 
         <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700 shadow-md">

@@ -3,25 +3,14 @@
 import Link from "next/link"
 import { useState } from "react"
 import {
-  Bell,
-  CircleUser,
   Home,
   LineChart,
   Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users,
   ChevronLeft,
   ChevronRight,
   Clock4,
-  Calendar,
-  MessageSquareCode,
-  MessageSquare,
   MessageSquareText,
   CalendarDays,
-  UserIcon,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
