@@ -23,7 +23,8 @@ export default function HomePage() {
   });
   const { page, pageSize } = paginationModel;
 
-  const filters = useState<JobFilters>({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [filters, setFilters] = useState<JobFilters>({
     responsible: user ? user.id : undefined,
     has_open_note: true,
   });
@@ -35,7 +36,7 @@ export default function HomePage() {
   const { refetch, isLoading, data: jobs } = useQuery({
     queryKey: ['jobs', page, pageSize, filters],
     queryFn: async () => {
-      return await fetchJobs(page, pageSize, filters as unknown as Record<string, unknown>);
+      return await fetchJobs(page, pageSize, filters as Record<string, unknown>);
     },
     enabled: true,
   });
