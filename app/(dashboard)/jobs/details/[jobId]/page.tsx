@@ -8,16 +8,17 @@ import { useParams } from 'next/navigation';
 import TopTitle from '@/components/global/top-title';
 import Briefing from '@/components/jobs/briefing';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import ArchieveComponent from '@/components/jobs/archive';
+import FollowersComponent from '@/components/jobs/followers';
+import JobApontamentos from '@/components/jobs/apontamentos';
+import JobDescription from '@/components/jobs/description/description';
 
 // hooks
 import { useQuery } from '@tanstack/react-query';
 import { fetchJobById } from '@/services/jobs';
 import { CustomerData, PackageData, RequestData, StatusData, UserData } from '@/models';
-import JobDescription from '@/components/jobs/description/description';
-import JobApontamentos from '@/components/jobs/apontamentos';
 import Comments from '@/components/jobs/comments';
-import FollowersComponent from '@/components/jobs/followers';
-import ArchieveComponent from '@/components/jobs/archive';
+import NotesModal from '@/components/modals/notesModal';
 
 
 export default function JobDetails() {
@@ -43,6 +44,7 @@ export default function JobDetails() {
 
   return (
     <main className="flex flex-col min-h-screen gap-4 px-4 py-4 md:px-0 md:ml-20 mt-[60px] lg:gap-6 lg:p-6">
+      <NotesModal />
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
