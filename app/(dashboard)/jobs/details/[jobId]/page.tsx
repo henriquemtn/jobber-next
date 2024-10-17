@@ -1,9 +1,6 @@
-import { useParams } from 'next/navigation'
 import React from 'react'
 
 export default function JobDetails() {
-  const params = useParams()
-  console.log(params)
 
   return (
     <main className="flex flex-1 min-h-screen flex-col gap-4 ml-20 mt-[60px] lg:gap-6 lg:p-6 dark:bg-[#191919]">
