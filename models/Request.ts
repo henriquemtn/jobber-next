@@ -1,4 +1,4 @@
-import { UserData, PackageData, ProjectData, RequestStatusData, CustomerData, ServiceTypeData, PriorityData } from './';
+import { UserData, PackageData, ProjectData, RequestStatusData, CustomerData, ServiceTypeData, PriorityData } from '.';
 
 export type RequestData = {
   id: number;
