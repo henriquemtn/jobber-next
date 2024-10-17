@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "@/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/contexts/AuthProvider";
 import Providers from "@/contexts/Providers";
@@ -29,7 +29,7 @@ export default function RootLayout({
 
   return (
         <html lang="en">
-          <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-[#191919]`}>
             <Providers>
                 <Toaster />
                 <AuthProvider>
