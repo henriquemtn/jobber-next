@@ -7,6 +7,8 @@ import { fetchJobs } from '@/services/jobs';
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import FormatData from '@/components/format/formatData';
+import { Eye } from 'lucide-react';
 
 interface JobFilters {
   responsible?: number;
@@ -38,7 +40,8 @@ export default function HomePage() {
     queryFn: async () => {
       return await fetchJobs(page, pageSize, filters as Record<string, unknown>);
     },
-    enabled: true,
+    refetchOnWindowFocus: false,
+    refetchInterval: false,
   });
 
   useEffect(() => {
@@ -111,14 +114,16 @@ export default function HomePage() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.customer?.name || "N/A"}</td> {/* Cliente */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.title}</td> {/* Título */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.budget ? "Sim" : "Não"}</td> {/* Orçamento */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.internal_term}</td> {/* Prazo interno */}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white"><FormatData value={job.internal_term} onlyDate /></td> {/* Prazo interno */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.responsible?.name || "N/A"}</td> {/* Responsável */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.project?.name || "N/A"}</td> {/* Projeto */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.package?.name || "N/A"}</td> {/* Pacote */}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.package?.name || "Nenhum"}</td> {/* Pacote */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.status?.name || "N/A"}</td> {/* Status */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">{job.estimated_time || "N/A"}</td> {/* Tempo estimado */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900  dark:text-white">
-                      <Button onClick={() => handleViewJob({ jobId: job.id })} variant="outline" className="mr-2">View</Button>
+                      <Button onClick={() => handleViewJob({ jobId: job.id })} variant="ghost" className="mr-2">
+                        <Eye size={16} />
+                      </Button>
                     </td>
                   </tr>
                 ))

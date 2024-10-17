@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "engines": {
-  "node": ">=18.x",
-  "npm": ">=7.x"
+    "node": ">=18.x",
+    "npm": ">=7.x"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.0",
@@ -24,8 +24,10 @@
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "edge-csrf": "^1.0.11",
     "formik": "^2.4.6",
+    "html-react-parser": "^5.1.18",
     "lucide-react": "^0.446.0",
     "next": "14.2.13",
     "next-themes": "^0.3.0",
