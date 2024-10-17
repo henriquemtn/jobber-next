@@ -22,6 +22,7 @@ const buttonVariants = cva(
         sidebar: "hover:bg-accent border-b-[1px] border-slate-200 rounded-none hover:text-accent-foreground",
         submit:
           "bg-[#3F19FF] text-white font-bold shadow hover:bg-blue-800 h-[40px]",
+        iconButton: "text-gray-500 hover:text-gray-700",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -39,7 +40,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
