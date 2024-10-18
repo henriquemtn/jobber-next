@@ -29,7 +29,7 @@ Frontend Jobber is a web application built using [Next.js 14](https://nextjs.org
 - **Framework**: Next.js 14
 - **UI Components**: TailwindCSS, Lucide Icons
 - **Forms**: Formik + Yup
-- **State Management**: React Query
+- **State Management**: @tanstack/ReactQuery
 - **Authentication**: Custom authentication system
 - **Backend API**: Axios integration with Jobber Core ( Django API )
 
@@ -89,7 +89,8 @@ Jobber Frontend é uma aplicação web desenvolvida usando Next.js 14, projetada
 - **Framework**: Next.js 14
 - **UI Components**: TailwindCSS, Lucide Icons
 - **Formulários**: Formik + Yup
-- **Gerenciamento de Estado**: React Query
+- **Gerenciamento de Estado**: @tanstack/ReactQuery
+- **Estados Globais**: Zustand
 - **Autenticação**: Sistema de autenticação personalizado
 - **API Backend**: Integração com Jobber Core ( Django ) via Axios
 
