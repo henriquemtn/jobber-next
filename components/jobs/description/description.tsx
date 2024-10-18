@@ -1,7 +1,7 @@
-import { JobData } from '@/models';
+import { IJobData } from '@/models';
 import DescriptionItem from './descriptionItem';
 
-interface JobDescriptionProps extends JobData {}
+interface JobDescriptionProps extends IJobData {}
 
 export default function JobDescription({
   id,

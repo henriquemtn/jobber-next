@@ -1,19 +1,34 @@
-import { LoginData } from '@/models';
-import api from '@/services/api';
+// * Models
+import { ILoginData } from "@/models"
 
-const ENDPOINT = '/auth';
+// * Services
+import api from "@/services/api"
 
-export const apiLogin = async (data: { email: string; password: string }): Promise<LoginData> => {
-  const { data: response } = await api.post(`${ENDPOINT}/token`, data);
-  return response;
-};
+const ENDPOINT = "/auth"
 
-export const resetPassword = async (email: string): Promise<{ status: string }> => {
-  const { data } = await api.post(`${ENDPOINT}/passwordreset`, { email });
-  return data;
-};
+export const apiLogin = async (data: { email: string; password: string }) => {
+  const { data: response } = await api.post<ILoginData>(
+    `${ENDPOINT}/token`,
+    data
+  )
+  return response
+}
 
-export const confirmPasswordReset = async (data: { token: string; password: string }): Promise<string> => {
-  const { data: response } = await api.post(`${ENDPOINT}/passwordreset/confirm`, data);
-  return response;
-};
+export const resetPassword = async (email: string) => {
+  const { data } = await api.post<{ status: string }>(
+    `${ENDPOINT}/passwordreset`,
+    email
+  )
+  return data
+}
+
+export const confirmPasswordReset = async (data: {
+  token: string
+  password: string
+}) => {
+  const { data: response } = await api.post<string>(
+    `${ENDPOINT}/passwordreset/confirm`,
+    data
+  )
+  return response
+}

@@ -1,6 +1,8 @@
-import { AuthProvider } from '@/contexts/AuthProvider';
-import Providers from '@/contexts/Providers';
 import { ReactNode } from 'react';
+
+// * Contexts
+import Providers from '@/contexts/query';
+import { AuthProvider } from '@/contexts/auth';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
