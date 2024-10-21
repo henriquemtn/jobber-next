@@ -6,6 +6,7 @@ import {
   Home,
   LineChart,
   Menu,
+  Users,
   ChevronLeft,
   ChevronRight,
   Clock4,
@@ -38,7 +39,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { ThemeSwitch } from "@/components/themeSwitch"
 
 export function Navigation() {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const { logout, user } = useAuth()
 
   return (
@@ -65,13 +66,14 @@ export function Navigation() {
                 <ChevronLeft className="h-3 w-3" />
               ) : (
                 <ChevronRight className="h-3 w-3" />
-              )}  
+              )}
               <span className="sr-only">Toggle sidebar</span>
             </Button>
           </div>
           <div className="flex-1">
             <nav className="grid items-start text-sm font-medium">
               <NavItem href="/" icon={Home} label="Dashboard" sidebarOpen={sidebarOpen} />
+              <NavItem href="/groups" icon={Users} label="Grupos" sidebarOpen={sidebarOpen} />
               <NavItem href="/solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={sidebarOpen} />
               <NavItem href="/jobs" icon={Clock4} label="Jobs" badge="6" sidebarOpen={sidebarOpen} />
               <NavItem href="/pauta" icon={CalendarDays} label="Pauta" sidebarOpen={sidebarOpen} />
@@ -107,13 +109,14 @@ export function Navigation() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
-            <SheetTitle>
-            <Link href="#" className="flex items-center gap-2 text-lg font-semibold">
+              <SheetTitle>
+                <Link href="#" className="flex items-center gap-2 text-lg font-semibold">
                   <Image alt="Jobber" src="/jobber-logo.png" width={90} height={31} />
                 </Link>
-            </SheetTitle>
+              </SheetTitle>
               <nav className="grid gap-2 text-lg font-medium">
                 <NavItem href="/" icon={Home} label="Dashboard" sidebarOpen={true} />
+                <NavItem href="/groups" icon={Users} label="Grupos" sidebarOpen={sidebarOpen} />
                 <NavItem href="/solicitacoes" icon={MessageSquareText} label="Solicitações" sidebarOpen={true} />
                 <NavItem href="/jobs" icon={Clock4} label="Jobs" badge="6" sidebarOpen={true} />
                 <NavItem href="/pauta" icon={CalendarDays} label="Pauta" sidebarOpen={true} />
@@ -136,8 +139,8 @@ export function Navigation() {
               </div>
             </SheetContent>
           </Sheet>
-            <div className="w-full">
-            </div>
+          <div className="w-full">
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon" className="bg-transparent rounded-full text-white">
