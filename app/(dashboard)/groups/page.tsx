@@ -1,9 +1,5 @@
 // * Components
-import { GroupsDashboard } from "@/components/groups/groups"
+import { GroupsDashboard } from "@/components/groups/groups";
 
-
-const GroupsPage = () => <GroupsDashboard />
+const GroupsPage = () => <GroupsDashboard />;
 export default GroupsPage;
-
-
-

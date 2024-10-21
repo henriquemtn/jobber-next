@@ -1,7 +1,7 @@
 import React from 'react'
 
 // components
-import TopTitle from '../global/top-title'
+import TopTitle from '../top-title'
 
 // TODO: implement followers component
 export default function FollowersComponent() {
