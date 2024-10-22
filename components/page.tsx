@@ -63,7 +63,7 @@ export const Page = ({
       </div>
 
       <div
-        className={`ml-5 bg-white rounded-md shadow-md overflow-hidden ${
+        className={`ml-5 bg-white dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${
           contentSize === "auto"
             ? "h-auto max-h-[90%] overflow-y-auto"
             : "h-[90%] flex flex-col"
