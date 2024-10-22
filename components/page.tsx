@@ -1,6 +1,3 @@
-// * Next
-// import Link from "next/link";
-
 // * Icons
 import { Plus } from "lucide-react";
 
@@ -10,11 +7,11 @@ import { BreadcrumbGeneric } from "@/components/breadcrumb/breadcrumb";
 
 interface IPageProps {
   title: string;
-  breadcrumb: string[][];
-  children: React.ReactNode | React.ReactNode[];
   addButton?: boolean;
-  otherButtons?: React.ReactElement[];
+  breadcrumb: string[][];
   contentSize: "max" | "auto";
+  otherButtons?: React.ReactElement[];
+  children: React.ReactNode | React.ReactNode[];
 }
 
 export const Page = ({
@@ -26,20 +23,12 @@ export const Page = ({
   contentSize,
 }: IPageProps) => {
   return (
-    <div className="ml-0 mt-14 p-6 h-[calc(100vh-60px)] bg-gray-100 md:ml-14 dark:bg-[#0E0E10]">
-      {/* <BreadcrumbGeneric>
-        {breadcrumb.map((crumb, index) => (
-          <Link key={crumb[1] + index} href={crumb[1]} className="ml-5 transition-colors hover:text-gray-600">
-            {crumb[0]}
-          </Link>
-        ))}
-      </BreadcrumbGeneric> */}
-
+    <div className="ml-0 p-6 w-screen bg-gray-100 dark:bg-[#0E0E10] flex flex-col">
       <BreadcrumbGeneric className="text-gray-600">
         {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
       </BreadcrumbGeneric>
 
-      <div className="flex flex-wrap items-center justify-between mb-6 mt-2 ml-5">
+      <div className="flex flex-wrap items-center justify-between mb-6 mt-2">
         <h1 className="m-0 text-2xl font-bold">{title}</h1>
 
         {(addButton || otherButtons) && (
@@ -63,11 +52,10 @@ export const Page = ({
       </div>
 
       <div
-        className={`ml-5 bg-white rounded-md shadow-md overflow-hidden ${
-          contentSize === "auto"
-            ? "h-auto max-h-[90%] overflow-y-auto"
-            : "h-[90%] flex flex-col"
-        }`}
+        className={`rounded-md bg-white shadow-md overflow-hidden flex-1 ${contentSize === "auto"
+          ? "h-auto max-h-full overflow-y-auto"
+          : "h-full flex flex-col"
+          }`}
       >
         {children}
       </div>

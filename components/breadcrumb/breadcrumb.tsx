@@ -1,14 +1,13 @@
 import { Fragment } from "react";
 
+// * Next
+import Link from "next/link";
+
 // * Utils
 import { cn } from "@/lib/utils";
 
 // * Icons
-import { ChevronRightIcon } from "@radix-ui/react-icons";
-import { Home, Users } from "lucide-react";
-
-// * Next
-import Link from "next/link";
+import { Home, Users, ChevronRightIcon } from "lucide-react";
 
 interface IBreadcrumbProps {
   children: Array<[string, string | undefined]>;
@@ -16,8 +15,8 @@ interface IBreadcrumbProps {
 }
 
 const iconMap: Record<string, React.ReactNode> = {
-  "Dashboard": <Home className="h-4 w-4" />,
-  "Grupos": <Users className="h-4 w-4" />,
+  "Dashboard": <Home size={16} />,
+  "Grupos": <Users size={16} />,
 };
 
 export const BreadcrumbGeneric = ({ children, className }: IBreadcrumbProps) => {
@@ -28,7 +27,7 @@ export const BreadcrumbGeneric = ({ children, className }: IBreadcrumbProps) => 
   }
 
   return (
-    <nav className={`flex items-center space-x-2 text-sm ml-5 ${className}`}>
+    <nav className={`flex items-center space-x-2 text-sm ${className}`}>
       {children.map(([label, href], index) => (
         <Fragment key={`breadcrumb-item-${index}`}>
           {href ? (
