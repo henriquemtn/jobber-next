@@ -143,13 +143,13 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map((row, index) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onClick={() => onClickRow(row.original)}
-                  className='cursor-pointer text-[14px] font-medium'
-                >
+                  className={`cursor-pointer text-[14px] font-medium ${index % 2 === 0 ? 'bg-gray-100 dark:bg-[#101010]' : ''}`}
+                  >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
