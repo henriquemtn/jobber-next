@@ -118,7 +118,7 @@ export function DataTable<TData, TValue>({
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id}>
                     {header.isPlaceholder ? null : (
-                      <div className="flex items-center">
+                      <div className="flex items-center font-medium ">
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
@@ -148,7 +148,7 @@ export function DataTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onClick={() => onClickRow(row.original)}
-                  className='cursor-pointer'
+                  className='cursor-pointer text-[14px] font-medium'
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

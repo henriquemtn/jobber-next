@@ -33,7 +33,7 @@ export const JobsDashboard = () => {
           queryKey="jobs"
           queryFn={fetchJobs}
           columns={columnJobs}
-          filterColumn="nome"
+          filterColumn="titulo"
           onClickRow={handleClickRow}
         />
     </Page>
