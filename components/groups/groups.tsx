@@ -4,7 +4,7 @@
 import { Page } from "@/components/page";
 
 // * Constants
-import { columnGroups } from "@/lib/datatable/groups";
+import { columnGroups } from "@/lib/datatable/columns/groups";
 
 // * Services
 import { fetchGroups } from "@/services";

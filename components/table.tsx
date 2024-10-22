@@ -36,6 +36,7 @@ interface DataTableProps<TData, TValue> {
   queryKey: string
   queryFn: (page?: number, pageSize?: number) => Promise<IRequestPaginated<TData>>
   filterColumn?: string
+  onClickRow: (row: TData) => void
 }
 
 export function DataTable<TData, TValue>({
@@ -43,6 +44,7 @@ export function DataTable<TData, TValue>({
   queryKey,
   queryFn,
   filterColumn,
+  onClickRow
 }: DataTableProps<TData, TValue>) {
   const [globalFilter, setGlobalFilter] = useState('')
   const [page, setPage] = useState(0)
@@ -108,7 +110,7 @@ export function DataTable<TData, TValue>({
           </SelectContent>
         </Select>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-auto">
         <Table>
           <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -145,6 +147,8 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => onClickRow(row.original)}
+                  className='cursor-pointer'
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
