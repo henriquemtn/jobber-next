@@ -11,6 +11,7 @@ import { fetchGroups } from "@/services";
 
 // * Hooks
 import { DataTable } from "../table";
+import { IGroupData } from "@/models";
 
 export const GroupsDashboard = () => {
 
@@ -20,7 +21,7 @@ export const GroupsDashboard = () => {
       breadcrumb={[["Grupos", "/groups/"]]}
       contentSize="max"
     >
-        <DataTable
+        <DataTable<IGroupData, unknown>
           queryKey="groups"
           queryFn={fetchGroups}
           columns={columnGroups}
