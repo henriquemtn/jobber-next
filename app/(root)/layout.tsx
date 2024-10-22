@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <ProtectedRoute>
           <SidebarProvider>
             <AppSidebar />
-            <SidebarTrigger className="z-[889]" />
+            <SidebarTrigger />
             {children}
           </SidebarProvider>
         </ProtectedRoute>

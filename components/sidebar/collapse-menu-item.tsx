@@ -1,15 +1,21 @@
-// *Icons
-import { ChevronDown, LucideIcon } from "lucide-react";
+// * Next
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-// *Components
-import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+// * Icons
+import { ChevronRight, LucideIcon } from "lucide-react";
+
+// * Components
+import { SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton } from "@/components/ui/sidebar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+
 
 // Type for submenu
 interface SubMenuItem {
   title: string;
   url: string;
   icon: LucideIcon;
+  active?: boolean;
 }
 
 // Type for main menu item
@@ -17,46 +23,45 @@ interface MenuItem {
   title: string;
   url?: string;
   icon: LucideIcon;
+  active?: boolean;
   submenu?: SubMenuItem[];
 }
 
 // Type for component props
 interface CollapsibleMenuItemProps {
-  item: MenuItem;
-  isOpen: (title: string) => boolean;
-  toggleMenu: (title: string) => void;
+  menu: MenuItem;
+  submenus: SubMenuItem[];
 }
 
 // Component for items with submenu (using collapsible)
-export const CollapsibleMenuItem = ({ item, isOpen, toggleMenu }: CollapsibleMenuItemProps) => {
+export const CollapsibleMenuItem = ({ menu, submenus }: CollapsibleMenuItemProps) => {
+  const pathname = usePathname();
+
   return (
-    <SidebarMenuItem key={item.title}>
+    <SidebarMenuItem key={menu.title}>
       <Collapsible
-        open={isOpen(item.title)}
-        onOpenChange={() => toggleMenu(item.title)}
+        className="group/collapsible"
       >
         <CollapsibleTrigger asChild>
-          <SidebarMenuButton asChild>
-            <div className="flex items-center justify-between gap-2 cursor-pointer">
-              <div className="flex items-center gap-2">
-                <item.icon size={18} />
-                <span>{item.title}</span>
-              </div>
-              <ChevronDown className={`transition-transform ${isOpen(item.title) ? 'rotate-180' : ''}`} />
-            </div>
+          <SidebarMenuButton tooltip={menu.title}>
+            {menu.icon && <menu.icon />}
+            <span>{menu.title}</span>
+            <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="pl-4">
-            {item.submenu && item.submenu.map((subitem) => (
-              <SidebarMenuItem key={subitem.title}>
-                <SidebarMenuButton asChild>
-                  <a href={subitem.url} className="flex items-center gap-2">
-                    <subitem.icon size={16} />
-                    <span>{subitem.title}</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+            {submenus && submenus.map(({ title, url, icon: Icon, active }) => (
+              <SidebarMenuSub key={title}>
+                <SidebarMenuSubButton asChild>
+                  <Link href={url} className={`${((active === undefined && pathname === url) || active) &&
+                    "bg-gray-700 text-white"
+                    }`}>
+                    {<Icon />}
+                    <span>{title}</span>
+                  </Link>
+                </SidebarMenuSubButton>
+              </SidebarMenuSub>
             ))}
           </div>
         </CollapsibleContent>
