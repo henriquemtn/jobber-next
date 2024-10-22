@@ -1,6 +1,6 @@
 // * Models
-import { IIdAndName } from "@/models"
+import { IIdAndName } from "@/models";
 
 export interface IGroupData extends IIdAndName {
-  permissions: string[]
+  permissions: string[];
 }
