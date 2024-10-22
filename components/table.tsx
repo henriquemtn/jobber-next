@@ -34,9 +34,9 @@ import { IRequestPaginated } from "@/models";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   queryKey: string
-  queryFn: (page?: number, pageSize?: number) => Promise<IRequestPaginated<TData>>
+  queryFn: (page?: number, pageSize?: number, filters?: any) => Promise<IRequestPaginated<TData>>;
   filterColumn?: string
-  onClickRow: (row: TData) => void
+  onClickRow?: (row: TData) => void
 }
 
 export function DataTable<TData, TValue>({
@@ -147,7 +147,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => onClickRow(row.original)}
+                  onClick={() => onClickRow && onClickRow(row.original)}
                   className={`cursor-pointer text-[14px] font-medium ${index % 2 === 0 ? 'bg-gray-100 dark:bg-[#101010]' : ''}`}
                   >
                   {row.getVisibleCells().map((cell) => (
