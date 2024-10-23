@@ -1,6 +1,3 @@
-// * Next
-// import Link from "next/link";
-
 // * Icons
 import { Plus } from "lucide-react";
 
@@ -10,11 +7,11 @@ import { BreadcrumbGeneric } from "@/components/breadcrumb/breadcrumb";
 
 interface IPageProps {
   title: string;
-  breadcrumb: string[][];
-  children: React.ReactNode | React.ReactNode[];
   addButton?: boolean;
-  otherButtons?: React.ReactElement[];
+  breadcrumb: string[][];
   contentSize: "max" | "auto";
+  otherButtons?: React.ReactElement[];
+  children: React.ReactNode | React.ReactNode[];
 }
 
 export const Page = ({
@@ -31,7 +28,7 @@ export const Page = ({
         {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
       </BreadcrumbGeneric>
 
-      <div className="flex flex-wrap items-center justify-between mb-6 mt-2 ml-5">
+      <div className="flex flex-wrap items-center justify-between mb-6 mt-2">
         <h1 className="m-0 text-2xl font-bold">{title}</h1>
 
         {(addButton || otherButtons) && (
