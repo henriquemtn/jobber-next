@@ -1,12 +1,17 @@
-'use client'
+"use client";
 
 // * Components
-import { Page } from "@/components/page"
-import { Skeleton } from "@/components/ui/skeleton"
-import { DataTable } from "../data-table/data-table-wrapper"
+import { Page } from "@/components/page";
 
 // * Constants
-import { columns } from "@/lib/data-table/columns/groups"
+import { columnGroups } from "@/lib/datatable/columns/groups";
+
+// * Services
+import { fetchGroups } from "@/services";
+
+// * Hooks
+import { DataTable } from "../table";
+import { IGroupData } from "@/models";
 
 export const GroupsDashboard = () => {
 
@@ -16,15 +21,12 @@ export const GroupsDashboard = () => {
       breadcrumb={[["Grupos", "/groups/"]]}
       contentSize="max"
     >
-      {true ? (
-        <DataTable data={[]} columns={columns} />
-
-      ) : (
-        <Skeleton className="w-full h-full" />
-      )}
+        <DataTable<IGroupData, unknown>
+          queryKey="groups"
+          queryFn={fetchGroups}
+          columns={columnGroups}
+          filterColumn="nome"
+        />
     </Page>
-  )
-}
-
-
-
+  );
+};

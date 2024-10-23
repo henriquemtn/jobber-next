@@ -1,11 +1,7 @@
+import { ICustomerData } from "@/models";
 import { ColumnDef } from "@tanstack/react-table";
 
-interface Job {
-  id: number;
-  name: string;
-}
-
-export const columns: ColumnDef<Job>[] = [
+export const columnCostumers: ColumnDef<ICustomerData>[] = [
   {
     accessorKey: "id",
     header: "ID",

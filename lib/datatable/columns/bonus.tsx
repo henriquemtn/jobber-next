@@ -1,11 +1,7 @@
+import { IBonusData } from "@/models";
 import { ColumnDef } from "@tanstack/react-table";
 
-interface Job {
-  id: number;
-  name: string;
-}
-
-export const columns: ColumnDef<Job>[] = [
+export const columnBonus: ColumnDef<IBonusData>[] = [
   {
     accessorKey: "id",
     header: "ID",
@@ -15,8 +11,8 @@ export const columns: ColumnDef<Job>[] = [
     cell: ({ getValue }) => <span>{getValue() as number}</span>,
   },
   {
-    accessorKey: "name",
-    header: "Nome",
+    accessorKey: "reason",
+    header: "Motivo",
     cell: ({ getValue }) => (
       <span
         style={{

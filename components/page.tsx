@@ -23,7 +23,7 @@ export const Page = ({
   contentSize,
 }: IPageProps) => {
   return (
-    <div className="ml-0 p-6 w-screen bg-gray-100 dark:bg-[#0E0E10] flex flex-col">
+    <div className="ml-0 mt-14 p-6 h-[calc(100vh-60px)] bg-gray-100 md:ml-14 dark:bg-[#0E0E10]">
       <BreadcrumbGeneric className="text-gray-600">
         {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
       </BreadcrumbGeneric>
@@ -52,10 +52,11 @@ export const Page = ({
       </div>
 
       <div
-        className={`rounded-md bg-white shadow-md overflow-hidden flex-1 ${contentSize === "auto"
-          ? "h-auto max-h-full overflow-y-auto"
-          : "h-full flex flex-col"
-          }`}
+        className={`ml-5 bg-white dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${
+          contentSize === "auto"
+            ? "h-auto max-h-[90%] overflow-y-auto"
+            : "h-[90%] flex flex-col"
+        }`}
       >
         {children}
       </div>
