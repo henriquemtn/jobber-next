@@ -4,6 +4,7 @@ import { Plus } from "lucide-react";
 // * Components
 import { Button } from "@/components/ui/button";
 import { BreadcrumbGeneric } from "@/components/breadcrumb/breadcrumb";
+import Link from "next/link";
 
 interface IPageProps {
   title: string;
@@ -12,6 +13,7 @@ interface IPageProps {
   contentSize: "max" | "auto";
   otherButtons?: React.ReactElement[];
   children: React.ReactNode | React.ReactNode[];
+  buttonLink?: string;
 }
 
 export const Page = ({
@@ -21,6 +23,7 @@ export const Page = ({
   otherButtons,
   children,
   contentSize,
+  buttonLink
 }: IPageProps) => {
   return (
     <div className="m-0 w-screen p-4 h-screen bg-gray-100 dark:bg-[#0E0E10]">
@@ -34,13 +37,15 @@ export const Page = ({
         {(addButton || otherButtons) && (
           <div className="flex space-x-2">
             {addButton && (
-              <Button
+              <Link href={buttonLink || '#'}>
+                <Button
                 variant="default"
                 className="bg-blue-600 hover:bg-blue-700 flex items-center space-x-2"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Adicionar</span>
-              </Button>
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Adicionar</span>
+                </Button>
+              </Link>
             )}
 
             {otherButtons &&
@@ -52,7 +57,7 @@ export const Page = ({
       </div>
 
       <div
-        className={`ml-5 bg-white dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${
+        className={`bg-white dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${
           contentSize === "auto"
             ? "h-auto max-h-[90%] overflow-y-auto"
             : "h-[90%] flex flex-col"

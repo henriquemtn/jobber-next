@@ -20,6 +20,8 @@ export const UsersDashboard = () => {
       title="Usuários:"
       breadcrumb={[["Usuários", "/users/"]]}
       contentSize="max"
+      addButton
+      buttonLink="/users/new"
     >
     <DataTable<IUserListData, unknown>
           queryKey="users"
