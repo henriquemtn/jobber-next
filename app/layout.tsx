@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased dark:bg-[#191919]">
+      <body className="antialiased">
         <AuthProvider>
           <QueryProviders>
             <Toaster />

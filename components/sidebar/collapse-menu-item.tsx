@@ -43,7 +43,9 @@ export const CollapsibleMenuItem = ({ menu, submenus }: CollapsibleMenuItemProps
         className="group/collapsible"
       >
         <CollapsibleTrigger asChild>
-          <SidebarMenuButton tooltip={menu.title}>
+          <SidebarMenuButton
+            tooltip={menu.title}
+          >
             {menu.icon && <menu.icon />}
             <span>{menu.title}</span>
             <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -53,9 +55,11 @@ export const CollapsibleMenuItem = ({ menu, submenus }: CollapsibleMenuItemProps
           <div className="pl-4">
             {submenus && submenus.map(({ title, url, icon: Icon, active }) => (
               <SidebarMenuSub key={title}>
-                <SidebarMenuSubButton asChild>
+                <SidebarMenuSubButton
+                  asChild
+                >
                   <Link href={url} className={`${((active === undefined && pathname === url) || active) &&
-                    "bg-gray-700 text-white"
+                    "bg-[#17162E] dark:bg-[#37373b] text-white"
                     }`}>
                     {<Icon />}
                     <span>{title}</span>

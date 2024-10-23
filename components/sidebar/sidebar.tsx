@@ -16,6 +16,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import { NavUser } from "@/components/profile/nav-user"
 import { CollapsibleMenuItem } from "@/components/sidebar/collapse-menu-item"
@@ -28,16 +29,17 @@ import { usePathname } from "next/navigation"
 export const AppSidebar = () => {
   const pathname = usePathname();
   const menuList = getMenuList(pathname);
+  const { open } = useSidebar()
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader>
-        <Link href="#" className="flex items-center gap-2 text-lg font-semibold">
-          <Image alt="Jobber" src="/jobber-logo.png" width={100} height={100} />
+      <SidebarHeader className="bg-[#17162E]">
+        <Link href="#" className="flex items-center gap-2 text-lg font-semibold mx-auto">
+          <Image alt="Jobber" src={open ? "/jobber-white-logo.svg" : "/favicon.svg"} width={open ? 90 : 31} height={open ? 31 : 31} />
         </Link>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="scrollbar dark:scrollbar-dark">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -56,7 +58,7 @@ export const AppSidebar = () => {
                         asChild
                       >
                         <Link href={url} className={`${((active === undefined && pathname === url) || active) &&
-                          "bg-gray-700 text-white"
+                          "bg-[#17162E] dark:bg-[#37373b] text-white hover:text-white transition-all hover:bg-gray-800"
                           }`}>
                           {Icon && <Icon />}
                           <span>{title}</span>
