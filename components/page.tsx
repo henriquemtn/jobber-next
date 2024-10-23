@@ -23,7 +23,7 @@ export const Page = ({
   contentSize,
 }: IPageProps) => {
   return (
-    <div className="ml-0 mt-14 p-6 h-[calc(100vh-60px)] bg-gray-100 md:ml-14 dark:bg-[#0E0E10]">
+    <div className="m-0 w-screen p-4 h-screen bg-gray-100 dark:bg-[#0E0E10]">
       <BreadcrumbGeneric className="text-gray-600">
         {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
       </BreadcrumbGeneric>
