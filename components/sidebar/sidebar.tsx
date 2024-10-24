@@ -3,6 +3,7 @@
 // * Next
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 // * Components
 import {
@@ -18,12 +19,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { NavUser } from "@/components/navuser/nav-user"
 import { CollapsibleMenuItem } from "@/components/sidebar/collapse-menu-item"
 
 // * Data
 import { getMenuList } from "@/lib/menu-list/menu-list"
-import { usePathname } from "next/navigation"
+
 
 
 export const AppSidebar = () => {
@@ -74,7 +74,7 @@ export const AppSidebar = () => {
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser />
+        {/* <NavUser /> */}
       </SidebarFooter>
     </Sidebar>
   )
