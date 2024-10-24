@@ -2,7 +2,6 @@
 
 // * Next
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 // * Components
 import { Page } from "@/components/page";
@@ -31,57 +30,60 @@ import { MultiSelect } from "../ui/multi-select";
 const userSchema = Yup.object().shape({
   first_name: Yup.string().required("O primeiro nome é obrigatório"),
   last_name: Yup.string().required("O sobrenome é obrigatório"),
-  email: Yup.string().email("E-mail inválido").required("O e-mail é obrigatório"),
+  email: Yup.string()
+    .email("E-mail inválido")
+    .required("O e-mail é obrigatório"),
   is_active: Yup.boolean().required("O status é obrigatório"),
   is_staff: Yup.boolean().required("O status de staff é obrigatório"),
   customer: Yup.array().of(Yup.number()),
   groups: Yup.array().of(Yup.number()),
 });
 
-export const UsersNew = () => {
+export const AddUsers = () => {
   const { isCustomer } = useAuth();
   const { usersPermissions } = usePermission();
   const navigate = useRouter();
 
-  useEffect(() => {
-    if (isCustomer || !usersPermissions) navigate.push('/');
-  }, [isCustomer, usersPermissions, navigate]);
-
   const mutation = useMutation<IUserData, Error, IUserPostData>({
-    mutationFn: (data: IUserPostData) => createUser(data)
+    mutationFn: (data: IUserPostData) => createUser(data),
   });
 
   const { data: customers } = useQuery({
     queryKey: ["customers"],
-    queryFn: fetchAllCustomers 
+    queryFn: fetchAllCustomers,
   });
 
   const { data: groups } = useQuery({
     queryKey: ["groups"],
-    queryFn: fetchAllGroups 
+    queryFn: fetchAllGroups,
   });
 
   const customersOptions = customers
-    ? customers.map(customer => ({
+    ? customers.map((customer) => ({
         value: customer.id.toString(),
-        label: customer.name
+        label: customer.name,
       }))
     : [];
 
   const groupsOptions = groups
-    ? groups.map(group => ({
+    ? groups.map((group) => ({
         value: group.id.toString(),
-        label: group.name
+        label: group.name,
       }))
     : [];
 
-    const handleCustomerChange = (selectedCustomers: number[], setFieldValue: (field: string, value: any) => void) => {
-      console.log("Selected Customers:", selectedCustomers);
-      setFieldValue("customer",  selectedCustomers); // Atualiza o campo "customer" com os IDs
-    };
-    
+  const handleCustomerChange = (
+    selectedCustomers: number[],
+    setFieldValue: (field: string, value: any) => void
+  ) => {
+    console.log("Selected Customers:", selectedCustomers);
+    setFieldValue("customer", selectedCustomers); // Atualiza o campo "customer" com os IDs
+  };
 
-  const handleGroupChange = (selectedGroups: any, setFieldValue: (field: string, value: any) => void) => {
+  const handleGroupChange = (
+    selectedGroups: any,
+    setFieldValue: (field: string, value: any) => void
+  ) => {
     console.log("Selected Groups:", selectedGroups);
     setFieldValue("groups", selectedGroups);
   };
@@ -89,7 +91,10 @@ export const UsersNew = () => {
   return (
     <Page
       title="Adicionar novo usuário:"
-      breadcrumb={[["Usuários", "/users/"], ["Adicionar", "/users/new"]]}
+      breadcrumb={[
+        ["Usuários", "/users/"],
+        ["Adicionar", "/users/new"],
+      ]}
       contentSize="max"
     >
       <div className="p-4 flex flex-col gap-2">
@@ -101,7 +106,7 @@ export const UsersNew = () => {
             is_active: true,
             is_staff: false,
             customer: [],
-            groups: []
+            groups: [],
           }}
           validationSchema={userSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -125,7 +130,11 @@ export const UsersNew = () => {
               <div className="flex flex-col gap-4">
                 <div>
                   <Label>Primeiro nome: *</Label>
-                  <Field as={Input} name="first_name" placeholder="Primeiro Nome" />
+                  <Field
+                    as={Input}
+                    name="first_name"
+                    placeholder="Primeiro Nome"
+                  />
                   <ErrorMessage
                     name="first_name"
                     component="div"
@@ -143,7 +152,12 @@ export const UsersNew = () => {
                 </div>
                 <div>
                   <Label>E-mail: *</Label>
-                  <Field as={Input} name="email" type="email" placeholder="E-mail" />
+                  <Field
+                    as={Input}
+                    name="email"
+                    type="email"
+                    placeholder="E-mail"
+                  />
                   <ErrorMessage
                     name="email"
                     component="div"
@@ -152,16 +166,26 @@ export const UsersNew = () => {
                 </div>
                 <div>
                   <Label>Cliente:</Label>
-                  <MultiSelect 
-                    options={customersOptions}          
-                    onValueChange={(selectedCustomers) => handleCustomerChange(selectedCustomers.map(Number), setFieldValue)} // Pass setFieldValue here
+                  <MultiSelect
+                    options={customersOptions}
+                    onValueChange={(selectedCustomers) =>
+                      handleCustomerChange(
+                        selectedCustomers.map(Number),
+                        setFieldValue
+                      )
+                    } // Pass setFieldValue here
                   />
                 </div>
                 <div>
                   <Label>Grupo:</Label>
-                  <MultiSelect 
-                    options={groupsOptions}         
-                    onValueChange={(selectedGroups) => handleGroupChange(selectedGroups.map(Number), setFieldValue)} // Pass setFieldValue here
+                  <MultiSelect
+                    options={groupsOptions}
+                    onValueChange={(selectedGroups) =>
+                      handleGroupChange(
+                        selectedGroups.map(Number),
+                        setFieldValue
+                      )
+                    } // Pass setFieldValue here
                   />
                 </div>
                 <div className="flex gap-2">

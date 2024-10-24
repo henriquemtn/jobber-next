@@ -4,5 +4,9 @@
  * @returns {Array}
  */
 
-export const sortBetweenName = (array: Array<{ name: string }>) =>
-  array.sort((a, b) => a.name.localeCompare(b.name))
+export const sortBetweenName = (
+  array: Array<{
+    id: any;
+    name: string;
+  }>
+) => array.sort((a, b) => a.name.localeCompare(b.name));

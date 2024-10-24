@@ -1,5 +1,5 @@
 // * Components
-import { UsersNew } from "@/components/users/users-new";
+import { AddUsers } from "@/components/users/add";
 
-const UserNewPage = () => <UsersNew />;
+const UserNewPage = () => <AddUsers />;
 export default UserNewPage;
