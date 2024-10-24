@@ -31,12 +31,11 @@ export const Page = ({
   buttonLink,
 }: IPageProps) => {
   return (
-    
     <motion.div
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="m-0 w-screen p-4 h-screen bg-gray-100 dark:bg-[#0E0E10]"
+      className="m-0 w-screen h-screen bg-gray-100 dark:bg-[#0E0E10]"
     >
       <Header breadcrumb={breadcrumb} />
 
@@ -69,7 +68,7 @@ export const Page = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`bg-white dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${
+        className={`bg-white m-4 dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${
           contentSize === "auto"
             ? "h-auto max-h-[90%] overflow-y-auto"
             : "h-[90%] flex flex-col"

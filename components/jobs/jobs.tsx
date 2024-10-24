@@ -24,18 +24,14 @@ export const JobsDashboard = () => {
   };
 
   return (
-    <Page
-      title="Jobs:"
-      breadcrumb={[["Jobs", "/jobs/"]]}
-      contentSize="max"
-    >
-        <DataTable
-          queryKey="jobs"
-          queryFn={fetchJobs}
-          columns={columnJobs}
-          filterColumn="titulo"
-          onClickRow={handleClickRow}
-        />
+    <Page title="Jobs:" breadcrumb={[["Jobs", "/jobs/"]]} contentSize="auto">
+      <DataTable
+        queryKey="jobs"
+        queryFn={fetchJobs}
+        columns={columnJobs}
+        filterColumn="titulo"
+        onClickRow={handleClickRow}
+      />
     </Page>
   );
 };
