@@ -33,7 +33,7 @@ export const AppSidebar = () => {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="bg-[#17162E]">
+      <SidebarHeader className="bg-[#17162E] h-14 justify-center">
         <Link href="#" className="flex items-center gap-2 text-lg font-semibold mx-auto">
           <Image alt="Jobber" src={open ? "/jobber-white-logo.svg" : "/favicon.svg"} width={open ? 90 : 31} height={open ? 31 : 31} />
         </Link>

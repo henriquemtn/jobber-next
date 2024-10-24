@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { ChevronRight, PanelLeft } from "lucide-react"
+import { ChevronLeft, PanelLeft } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -282,10 +282,11 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <ChevronRight
-        className={cn("transition-transform duration-200 hidden md:block", {
-          "rotate-180": open,
-        })}
+      <ChevronLeft
+        className={cn(
+          "h-4 w-4 transition-transform ease-in-out duration-700 hidden md:block",
+          open === false ? "rotate-180" : "rotate-0"
+        )}
       />
       <PanelLeft
         className="transition-transform duration-200 block md:hidden"

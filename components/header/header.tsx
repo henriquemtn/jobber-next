@@ -10,9 +10,9 @@ interface NavbarProps {
 export const Header = ({ breadcrumb }: NavbarProps) => {
   return (
     <header className="sticky top-0 z-10 w-full bg-background/95 shadow backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:shadow-secondary">
-      <div className="mx-4 sm:mx-8 flex h-14 items-center">
-        <div className="flex items-center space-x-4 lg:space-x-0">
-          <SidebarTrigger className="md:absolute left-[-12px]" />
+      <div className="mx-4 sm:mx-2 flex h-14 items-center">
+        <div className="flex gap-2 items-center space-x-4 lg:space-x-0">
+          <SidebarTrigger />
           <BreadcrumbGeneric className="text-gray-600">
             {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
           </BreadcrumbGeneric>
