@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 
 // * Components
 import { Button } from "@/components/ui/button";
-import { BreadcrumbGeneric } from "@/components/breadcrumb/breadcrumb";
+import { Header } from "@/components/header/header";
 
 // * Motion
 import { motion } from "framer-motion";
@@ -31,18 +31,17 @@ export const Page = ({
   buttonLink,
 }: IPageProps) => {
   return (
+    
     <motion.div
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       className="m-0 w-screen p-4 h-screen bg-gray-100 dark:bg-[#0E0E10]"
     >
-      <BreadcrumbGeneric className="text-gray-600">
-        {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
-      </BreadcrumbGeneric>
+      <Header breadcrumb={breadcrumb} />
 
-      <div className="flex flex-wrap items-center justify-between mb-6 mt-2">
-        <h1 className="m-0 text-2xl font-bold">{title}</h1>
+      <div className="flex flex-wrap items-center justify-between mb-3 mt-2">
+        <h1 className="ml-5 text-2xl font-bold">{title}</h1>
 
         {(addButton || otherButtons) && (
           <div className="flex space-x-2">

@@ -4,7 +4,7 @@ import { ProtectedRoute } from "@/security/protectedRoute";
 
 // * Components
 import { AppSidebar } from "@/components/sidebar/sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -14,7 +14,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <ProtectedRoute>
           <SidebarProvider>
             <AppSidebar />
-            <SidebarTrigger />
             {children}
           </SidebarProvider>
         </ProtectedRoute>
