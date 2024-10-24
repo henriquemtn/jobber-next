@@ -16,7 +16,7 @@ import { createProject, fetchAllCustomers } from "@/services";
 // * Hooks
 import { usePermission } from "@/hooks/usePermissions";
 import { useAuth } from "@/hooks/useAuth";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 // * Utils
 import toast from "react-hot-toast";
@@ -48,18 +48,6 @@ export const AddProjects = () => {
   const mutation = useMutation<IProjectData, Error, IProjectPostData>({
     mutationFn: (data: IProjectPostData) => createProject(data),
   });
-
-  const { data: customers } = useQuery({
-    queryKey: ["customers"],
-    queryFn: fetchAllCustomers,
-  });
-
-  const customersOptions = customers
-    ? customers.map((customer) => ({
-        value: customer.id.toString(),
-        label: customer.name,
-      }))
-    : [];
 
   const handleCustomerChange = (
     selectedCustomer: IIdAndName | null,
@@ -94,15 +82,14 @@ export const AddProjects = () => {
           }}
           validationSchema={projectSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
-            console.log("Submitting values:", values); // Adiciona esse log para ver se está capturando os valores
+            console.log("Submitting values:", values);
             mutation.mutate(values, {
               onSuccess: () => {
-                console.log("Projeto adicionado com sucesso"); // Adicione esse log também
                 resetForm();
                 toast.success("Projeto adicionado com sucesso!");
               },
               onError: (error) => {
-                console.error("Erro ao adicionar o projeto:", error); // Verifique qualquer erro aqui
+                console.error("Erro ao adicionar o projeto:", error);
                 toast.error("Erro ao adicionar o projeto. Tente novamente.");
               },
               onSettled: () => {

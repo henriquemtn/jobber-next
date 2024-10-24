@@ -77,7 +77,7 @@ export const AddUsers = () => {
     setFieldValue: (field: string, value: any) => void
   ) => {
     console.log("Selected Customers:", selectedCustomers);
-    setFieldValue("customer", selectedCustomers); // Atualiza o campo "customer" com os IDs
+    setFieldValue("customer", selectedCustomers);
   };
 
   const handleGroupChange = (
