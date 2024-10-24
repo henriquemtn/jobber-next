@@ -1,54 +1,28 @@
-"use client"
-
 // * Components
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ThemeSwitch } from "@/components/themeSwitch"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { BreadcrumbGeneric } from "@/components/breadcrumb/breadcrumb";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { UserNav } from "@/components/header/user-nav";
+import { ThemeSwitch } from "@/components/themeSwitch";
 
-// * Hooks & Utils
-import { useAuth } from "@/hooks/useAuth"
+interface NavbarProps {
+  breadcrumb: string[][];
+}
 
-export const Header = () => {
-  const { logout, user } = useAuth()
-
+export const Header = ({ breadcrumb }: NavbarProps) => {
   return (
-    <header className="fixed bg-[#17162E] dark:bg-[#18171B] z-[888] top-0 w-full flex h-14 items-center gap-4 px-4 lg:h-[60px] lg:px-6">
-      <div className="flex w-full justify-end">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" className="bg-transparent rounded-full text-white">
-              <Avatar>
-                <AvatarFallback className="bg-gray-700 text-white">
-                  {user && user.name.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel className="pt-3">
-              {user && (
-                <span className="text-black dark:text-white">
-                  {user.name}
-                </span>
-              )}
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">Minha conta</DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">Suporte</DropdownMenuItem>
-            <ThemeSwitch />
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={logout} className="cursor-pointer">Sair do Jobber</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+    <header className="sticky top-0 z-10 w-full bg-background/95 shadow backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:shadow-secondary">
+      <div className="mx-4 sm:ml-2 sm:mr-5 flex h-14 items-center">
+        <div className="flex items-center space-x-4 lg:space-x-0 lg:gap-2">
+          <SidebarTrigger />
+          <BreadcrumbGeneric className="text-gray-600">
+            {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
+          </BreadcrumbGeneric>
+        </div>
+        <div className="flex flex-1 items-center justify-end gap-2">
+          <ThemeSwitch />
+          <UserNav />
+        </div>
       </div>
     </header>
-  )
+  );
 }
