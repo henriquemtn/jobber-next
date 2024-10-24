@@ -12,17 +12,24 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
   useSidebar,
 } from "@/components/ui/sidebar"
 import { CollapsibleMenuItem } from "@/components/sidebar/collapse-menu-item"
 
+// * Icons
+import { LogOut } from "lucide-react"
+
+// * Hooks
+import { useAuth } from "@/hooks/useAuth"
+
 // * Data
 import { getMenuList } from "@/lib/menu-list/menu-list"
+
 
 
 
@@ -30,6 +37,7 @@ export const AppSidebar = () => {
   const pathname = usePathname();
   const menuList = getMenuList(pathname);
   const { open } = useSidebar()
+  const { logout } = useAuth()
 
   return (
     <Sidebar collapsible="icon">
@@ -38,7 +46,7 @@ export const AppSidebar = () => {
           <Image alt="Jobber" src={open ? "/jobber-white-logo.svg" : "/favicon.svg"} width={open ? 90 : 31} height={open ? 31 : 31} />
         </Link>
       </SidebarHeader>
-
+      <SidebarSeparator />
       <SidebarContent className="scrollbar dark:scrollbar-dark">
         <SidebarGroup>
           <SidebarGroupContent>
@@ -72,9 +80,12 @@ export const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
+      <SidebarSeparator />
       <SidebarFooter>
-        {/* <NavUser /> */}
+        <SidebarMenuButton onClick={logout} tooltip="Sair">
+          <LogOut size={18} />
+          <span>Sair</span>
+        </SidebarMenuButton>
       </SidebarFooter>
     </Sidebar>
   )
