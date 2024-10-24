@@ -1,24 +1,32 @@
 "use client";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+// * Next
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 // * Components
 import { Page } from "@/components/page";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Label } from "../ui/label";
 
 // * Services
-import { createUser } from "@/services";
+import { createUser, fetchAllCustomers, fetchAllGroups } from "@/services";
 
 // * Hooks
-import { Save } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
-import { IUserData, IUserPostData } from "@/models";
+import { usePermission } from "@/hooks/usePermissions";
+import { useAuth } from "@/hooks/useAuth";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+// * Utils
 import toast from "react-hot-toast";
-import { Switch } from "../ui/switch";
-import { Label } from "../ui/label";
-import { ComboboxCustomers } from "../customers/customers-select";
+import { Save } from "lucide-react";
+import { IIdAndName, IUserData, IUserPostData } from "@/models";
+
+// * Form
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { MultiSelect } from "../ui/multi-select";
 
 const userSchema = Yup.object().shape({
   first_name: Yup.string().required("O primeiro nome é obrigatório"),
@@ -26,14 +34,57 @@ const userSchema = Yup.object().shape({
   email: Yup.string().email("E-mail inválido").required("O e-mail é obrigatório"),
   is_active: Yup.boolean().required("O status é obrigatório"),
   is_staff: Yup.boolean().required("O status de staff é obrigatório"),
-  customer: Yup.array().of(Yup.number()).required("Clientes são obrigatórios"),
-  groups: Yup.array().of(Yup.number()).required("Grupos são obrigatórios")
+  customer: Yup.array().of(Yup.number()),
+  groups: Yup.array().of(Yup.number()),
 });
 
 export const UsersNew = () => {
+  const { isCustomer } = useAuth();
+  const { usersPermissions } = usePermission();
+  const navigate = useRouter();
+
+  useEffect(() => {
+    if (isCustomer || !usersPermissions) navigate.push('/');
+  }, [isCustomer, usersPermissions, navigate]);
+
   const mutation = useMutation<IUserData, Error, IUserPostData>({
     mutationFn: (data: IUserPostData) => createUser(data)
   });
+
+  const { data: customers } = useQuery({
+    queryKey: ["customers"],
+    queryFn: fetchAllCustomers 
+  });
+
+  const { data: groups } = useQuery({
+    queryKey: ["groups"],
+    queryFn: fetchAllGroups 
+  });
+
+  const customersOptions = customers
+    ? customers.map(customer => ({
+        value: customer.id.toString(),
+        label: customer.name
+      }))
+    : [];
+
+  const groupsOptions = groups
+    ? groups.map(group => ({
+        value: group.id.toString(),
+        label: group.name
+      }))
+    : [];
+
+    const handleCustomerChange = (selectedCustomers: number[], setFieldValue: (field: string, value: any) => void) => {
+      console.log("Selected Customers:", selectedCustomers);
+      setFieldValue("customer",  selectedCustomers); // Atualiza o campo "customer" com os IDs
+    };
+    
+
+  const handleGroupChange = (selectedGroups: any, setFieldValue: (field: string, value: any) => void) => {
+    console.log("Selected Groups:", selectedGroups);
+    setFieldValue("groups", selectedGroups);
+  };
 
   return (
     <Page
@@ -42,8 +93,6 @@ export const UsersNew = () => {
       contentSize="max"
     >
       <div className="p-4 flex flex-col gap-2">
-        <h2 className="text-xl font-bold">Adicionar novo usuário:</h2>
-
         <Formik
           initialValues={{
             first_name: "",
@@ -71,10 +120,11 @@ export const UsersNew = () => {
             });
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, setFieldValue }) => (
             <Form>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-4">
                 <div>
+                  <Label>Primeiro nome: *</Label>
                   <Field as={Input} name="first_name" placeholder="Primeiro Nome" />
                   <ErrorMessage
                     name="first_name"
@@ -83,6 +133,7 @@ export const UsersNew = () => {
                   />
                 </div>
                 <div>
+                  <Label>Último nome: *</Label>
                   <Field as={Input} name="last_name" placeholder="Sobrenome" />
                   <ErrorMessage
                     name="last_name"
@@ -91,6 +142,7 @@ export const UsersNew = () => {
                   />
                 </div>
                 <div>
+                  <Label>E-mail: *</Label>
                   <Field as={Input} name="email" type="email" placeholder="E-mail" />
                   <ErrorMessage
                     name="email"
@@ -99,35 +151,48 @@ export const UsersNew = () => {
                   />
                 </div>
                 <div>
-                  <ComboboxCustomers />
+                  <Label>Cliente:</Label>
+                  <MultiSelect 
+                    options={customersOptions}          
+                    onValueChange={(selectedCustomers) => handleCustomerChange(selectedCustomers.map(Number), setFieldValue)} // Pass setFieldValue here
+                  />
                 </div>
                 <div>
-                  <Field as={Input} name="groups" placeholder="ID dos Grupos" />
-                  <ErrorMessage
-                    name="groups"
-                    component="div"
-                    className="text-red-600 text-sm"
+                  <Label>Grupo:</Label>
+                  <MultiSelect 
+                    options={groupsOptions}         
+                    onValueChange={(selectedGroups) => handleGroupChange(selectedGroups.map(Number), setFieldValue)} // Pass setFieldValue here
                   />
                 </div>
                 <div className="flex gap-2">
-                <div className="flex items-center space-x-2">
-                    <Switch id="is_active" name="is_active" />
-                    <Label htmlFor="airplane-mode">É Ativo?</Label>
+                  <div className="flex items-center space-x-2">
+                    <Field
+                      type="checkbox"
+                      id="is_active"
+                      name="is_active"
+                      className="cursor-pointer"
+                    />
+                    <Label htmlFor="is_active">É Ativo?</Label>
                   </div>
-                <div className="flex items-center space-x-2">
-                    <Switch id="is_staff" name="is_staff" />
-                    <Label htmlFor="airplane-mode">É um Administrador?</Label>
+                  <div className="flex items-center space-x-2">
+                    <Field
+                      type="checkbox"
+                      id="is_staff"
+                      name="is_staff"
+                      className="cursor-pointer"
+                    />
+                    <Label htmlFor="is_staff">É um Administrador?</Label>
                   </div>
                 </div>
+                <Button
+                  type="submit"
+                  className="w-[300px] mt-4"
+                  disabled={isSubmitting}
+                >
+                  <Save className="w-4 h-4 mr-2" />
+                  {isSubmitting ? "Salvando..." : "Salvar"}
+                </Button>
               </div>
-              <Button
-                type="submit"
-                className="w-[300px] mt-4"
-                disabled={isSubmitting}
-              >
-                <Save className="w-4 h-4 mr-2" />
-                {isSubmitting ? "Salvando..." : "Salvar"}
-              </Button>
             </Form>
           )}
         </Formik>
