@@ -1,10 +1,15 @@
+// * Next
+import Link from "next/link";
+
 // * Icons
 import { Plus } from "lucide-react";
 
 // * Components
 import { Button } from "@/components/ui/button";
 import { BreadcrumbGeneric } from "@/components/breadcrumb/breadcrumb";
-import Link from "next/link";
+
+// * Motion
+import { motion } from "framer-motion";
 
 interface IPageProps {
   title: string;
@@ -23,10 +28,15 @@ export const Page = ({
   otherButtons,
   children,
   contentSize,
-  buttonLink
+  buttonLink,
 }: IPageProps) => {
   return (
-    <div className="m-0 w-screen p-4 h-screen bg-gray-100 dark:bg-[#0E0E10]">
+    <motion.div
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="m-0 w-screen p-4 h-screen bg-gray-100 dark:bg-[#0E0E10]"
+    >
       <BreadcrumbGeneric className="text-gray-600">
         {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
       </BreadcrumbGeneric>
@@ -37,10 +47,10 @@ export const Page = ({
         {(addButton || otherButtons) && (
           <div className="flex space-x-2">
             {addButton && (
-              <Link href={buttonLink || '#'}>
+              <Link href={buttonLink || "#"}>
                 <Button
-                variant="default"
-                className="bg-blue-600 hover:bg-blue-700 flex items-center space-x-2"
+                  variant="default"
+                  className="bg-blue-600 hover:bg-blue-700 flex items-center space-x-2"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Adicionar</span>
@@ -56,7 +66,10 @@ export const Page = ({
         )}
       </div>
 
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
         className={`bg-white dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${
           contentSize === "auto"
             ? "h-auto max-h-[90%] overflow-y-auto"
@@ -64,7 +77,7 @@ export const Page = ({
         }`}
       >
         {children}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };

@@ -1,9 +1,9 @@
 // * Next
-import { useState } from 'react'
+import { useState } from "react";
 
 // * Components
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -11,8 +11,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 // * Hooks & Utils
 import {
@@ -24,19 +30,23 @@ import {
   SortingState,
   getFilteredRowModel,
   getSortedRowModel,
-} from '@tanstack/react-table'
-import { useQuery } from '@tanstack/react-query'
-import { ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react'
+} from "@tanstack/react-table";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowUpDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Models
 import { IRequestPaginated } from "@/models";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  queryKey: string
-  queryFn: (page?: number, pageSize?: number, filters?: any) => Promise<IRequestPaginated<TData>>;
-  filterColumn?: string
-  onClickRow?: (row: TData) => void
+  columns: ColumnDef<TData, TValue>[];
+  queryKey: string;
+  queryFn: (
+    page?: number,
+    pageSize?: number,
+    filters?: any
+  ) => Promise<IRequestPaginated<TData>>;
+  filterColumn?: string;
+  onClickRow?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -44,17 +54,17 @@ export function DataTable<TData, TValue>({
   queryKey,
   queryFn,
   filterColumn,
-  onClickRow
+  onClickRow,
 }: DataTableProps<TData, TValue>) {
-  const [globalFilter, setGlobalFilter] = useState('')
-  const [page, setPage] = useState(0)
-  const [pageSize, setPageSize] = useState(10)
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [globalFilter, setGlobalFilter] = useState("");
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: [queryKey, page, pageSize],
-    queryFn: () => queryFn(page, pageSize), 
-  })
+    queryFn: () => queryFn(page, pageSize),
+  });
 
   const table = useReactTable({
     data: data?.results || [],
@@ -73,12 +83,12 @@ export function DataTable<TData, TValue>({
     },
     onGlobalFilterChange: setGlobalFilter,
     onSortingChange: setSorting,
-    globalFilterFn: 'includesString',
+    globalFilterFn: "includesString",
     pageCount: Math.ceil((data?.count ?? 0) / pageSize),
-  })
+  });
 
-  if (isLoading) return <div>Loading...</div>
-  if (isError) return <div>Error fetching data</div>
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching data</div>;
 
   return (
     <div className="space-y-4 p-4">
@@ -86,7 +96,7 @@ export function DataTable<TData, TValue>({
         {filterColumn && (
           <Input
             placeholder={`Filtrar por ${filterColumn}...`}
-            value={globalFilter ?? ''}
+            value={globalFilter ?? ""}
             onChange={(event) => setGlobalFilter(String(event.target.value))}
             className="max-w-sm"
           />
@@ -94,8 +104,8 @@ export function DataTable<TData, TValue>({
         <Select
           value={pageSize.toString()}
           onValueChange={(value) => {
-            setPageSize(Number(value))
-            table.setPageSize(Number(value))
+            setPageSize(Number(value));
+            table.setPageSize(Number(value));
           }}
         >
           <SelectTrigger className="w-[180px]">
@@ -113,7 +123,7 @@ export function DataTable<TData, TValue>({
       <div className="rounded-md border overflow-auto">
         <Table>
           <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id}>
@@ -148,18 +158,26 @@ export function DataTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onClick={() => onClickRow && onClickRow(row.original)}
-                  className={`cursor-pointer text-[14px] font-medium ${index % 2 === 0 ? 'bg-gray-100 dark:bg-[#101010]' : ''}`}
-                  >
+                  className={`cursor-pointer text-[14px] font-medium ${
+                    index % 2 === 0 ? "bg-gray-100 dark:bg-[#101010]" : ""
+                  }`}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>
@@ -169,15 +187,17 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div>
-        <span className="text-sm font-medium">
-          {(data?.count ?? 0) > 0 ? (
-            <>
-              {page * pageSize + 1}–{Math.min((page + 1) * pageSize, data?.count ?? 0)} de {data?.count ?? 0}
-            </>
-          ) : (
-            "Nenhum resultado"
-          )}
-        </span>
+          <span className="text-sm font-medium">
+            {(data?.count ?? 0) > 0 ? (
+              <>
+                {page * pageSize + 1}–
+                {Math.min((page + 1) * pageSize, data?.count ?? 0)} de{" "}
+                {data?.count ?? 0}
+              </>
+            ) : (
+              "Nenhum resultado"
+            )}
+          </span>
         </div>
         <Button
           variant="outline"
@@ -197,5 +217,5 @@ export function DataTable<TData, TValue>({
         </Button>
       </div>
     </div>
-  )
+  );
 }
