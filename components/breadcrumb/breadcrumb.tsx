@@ -7,7 +7,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 // * Icons
-import { Home, Users, ChevronRightIcon } from "lucide-react";
+import { Home, Users, ChevronRightIcon, Heart, Star, Package, Wallet } from "lucide-react";
 
 interface IBreadcrumbProps {
   children: Array<[string, string | undefined]>;
@@ -17,6 +17,11 @@ interface IBreadcrumbProps {
 const iconMap: Record<string, React.ReactNode> = {
   "Dashboard": <Home size={16} />,
   "Grupos": <Users size={16} />,
+  "Usuários": <Users size={16} />,
+  "Clientes": <Heart size={16} />,
+  "Projetos": <Star size={16} />,
+  "Pacotes": <Package size={16} />,
+  "Carteira de Pacotes": <Wallet size={16} />,
 };
 
 export const BreadcrumbGeneric = ({ children, className }: IBreadcrumbProps) => {
