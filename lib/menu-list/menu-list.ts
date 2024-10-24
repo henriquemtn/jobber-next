@@ -21,7 +21,7 @@ import {
 type Submenu = {
   url: string;
   title: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   active?: boolean;
 };
 
@@ -99,9 +99,9 @@ export const getMenuList = (pathname: string): Group[] => {
           url: "",
           icon: MessageSquareText,
           submenus: [
-            { title: "Todas", url: "/requests/all", icon: MessageSquareText },
-            { title: "Por pacotes", url: "/requests/package", icon: MessageSquareText },
-            { title: "Por projetos", url: "/requests/project", icon: MessageSquareText }
+            { title: "Todas", url: "/requests/all" },
+            { title: "Por pacotes", url: "/requests/package" },
+            { title: "Por projetos", url: "/requests/project" }
           ]
         },
         {
@@ -109,8 +109,8 @@ export const getMenuList = (pathname: string): Group[] => {
           url: "",
           icon: Clock,
           submenus: [
-            { title: "Listar", url: "/jobs", icon: Clock },
-            { title: "Importar", url: "/jobs/import", icon: Clock },
+            { title: "Listar", url: "/jobs" },
+            { title: "Importar", url: "/jobs/import" },
           ]
         },
         {
@@ -118,8 +118,8 @@ export const getMenuList = (pathname: string): Group[] => {
           url: "",
           icon: CalendarCheck2,
           submenus: [
-            { title: "Pauta de produção", url: "/schedules/production", icon: CalendarCheck2 },
-            { title: "Pauta de entrega", url: "/schedules/deadline", icon: CalendarCheck2 },
+            { title: "Pauta de produção", url: "/schedules/production" },
+            { title: "Pauta de entrega", url: "/schedules/deadline" },
           ]
         },
         {
@@ -127,11 +127,11 @@ export const getMenuList = (pathname: string): Group[] => {
           url: "",
           icon: ChartLine,
           submenus: [
-            { title: "Customizados", url: "/dev", icon: ChartLine },
-            { title: "Apontamentos", url: "/reports/note", icon: ChartLine },
-            { title: "Clientes", url: "/reports/customer", icon: ChartLine },
-            { title: "Jobs", url: "/reports/job", icon: ChartLine },
-            { title: "Pacotes", url: "/reports/package", icon: ChartLine },
+            { title: "Customizados", url: "#", },
+            { title: "Apontamentos", url: "/reports/note" },
+            { title: "Clientes", url: "/reports/customer" },
+            { title: "Jobs", url: "/reports/job" },
+            { title: "Pacotes", url: "/reports/package" },
           ]
         },
         {
@@ -139,10 +139,10 @@ export const getMenuList = (pathname: string): Group[] => {
           url: "",
           icon: TabletSmartphone,
           submenus: [
-            { title: "Apps", url: "/apps", icon: TabletSmartphone },
-            { title: "FAQS", url: "/faqs", icon: TabletSmartphone },
-            { title: "Postagens", url: "/posts", icon: TabletSmartphone },
-            { title: "Serviços", url: "/services", icon: TabletSmartphone },
+            { title: "Apps", url: "/apps" },
+            { title: "FAQS", url: "/faqs" },
+            { title: "Postagens", url: "/posts" },
+            { title: "Serviços", url: "/services" },
           ]
         },
       ]

@@ -18,7 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { NavUser } from "@/components/profile/nav-user"
+import { NavUser } from "@/components/navuser/nav-user"
 import { CollapsibleMenuItem } from "@/components/sidebar/collapse-menu-item"
 
 // * Data
@@ -58,7 +58,7 @@ export const AppSidebar = () => {
                         asChild
                       >
                         <Link href={url} className={`${((active === undefined && pathname === url) || active) &&
-                          "bg-[#17162E] dark:bg-[#37373b] text-white hover:text-white transition-all hover:bg-gray-800"
+                          "bg-[#17162E] dark:bg-[#37373b] text-white transition-all hover:bg-gray-800"
                           }`}>
                           {Icon && <Icon />}
                           <span>{title}</span>

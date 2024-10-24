@@ -3,7 +3,7 @@ import { Plus } from "lucide-react";
 
 // * Components
 import { Button } from "@/components/ui/button";
-import { BreadcrumbGeneric } from "@/components/breadcrumb/breadcrumb";
+import { Header } from "@/components/header/header";
 
 interface IPageProps {
   title: string;
@@ -23,10 +23,8 @@ export const Page = ({
   contentSize,
 }: IPageProps) => {
   return (
-    <div className="m-0 w-screen p-4 h-screen bg-gray-100 dark:bg-[#0E0E10]">
-      <BreadcrumbGeneric className="text-gray-600">
-        {breadcrumb.map((crumb) => [crumb[0], crumb[1]])}
-      </BreadcrumbGeneric>
+    <div className="m-0 w-screen h-screen bg-gray-100 dark:bg-[#0E0E10]">
+      <Header breadcrumb={breadcrumb} />
 
       <div className="flex flex-wrap items-center justify-between mb-6 mt-2">
         <h1 className="m-0 text-2xl font-bold">{title}</h1>
@@ -52,11 +50,10 @@ export const Page = ({
       </div>
 
       <div
-        className={`ml-5 bg-white dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${
-          contentSize === "auto"
-            ? "h-auto max-h-[90%] overflow-y-auto"
-            : "h-[90%] flex flex-col"
-        }`}
+        className={`ml-5 bg-white dark:bg-[#18171B] rounded-md shadow-md overflow-hidden ${contentSize === "auto"
+          ? "h-auto max-h-[90%] overflow-y-auto"
+          : "h-[90%] flex flex-col"
+          }`}
       >
         {children}
       </div>
